@@ -1,0 +1,13 @@
+# Dependências
+node_modules/
+
+# Variáveis de ambiente (contém senhas e secrets)
+.env
+
+# Logs
+*.log
+server_log.txt
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
