@@ -56,13 +56,17 @@ const [cobrancas_urgentes] = await db.query(
 };
 
 const getDefaulters = async (req, res) => {
-const [rows] = await db.query(
-	        `SELECT id, name, balance,
-	           (CURRENT_DATE - updated_at::date) AS dias_atraso
-	        FROM customers
-	        WHERE status = 'em_debito' AND balance > 0
-	        ORDER BY dias_atraso DESC`);
-    res.json(rows)
+    try {
+        const [rows] = await db.query(
+            `SELECT id, name, balance,
+               (CURRENT_DATE - updated_at::date) AS dias_atraso
+            FROM customers
+            WHERE status = 'em_debito' AND balance > 0
+            ORDER BY dias_atraso DESC`);
+        res.json(rows);
+    } catch (err) {
+        res.status(500).json({ error: 'Erro ao buscar inadimplentes', detalhes: err.message });
+    }
 }
 
 const getActiveOrders = async (Req, res) => {
@@ -83,14 +87,18 @@ const getActiveOrders = async (Req, res) => {
 
 const search = async (req, res) => {
     const { q } = req.query;
-    const [ rows ] = await db.query(
-        `SELECT id, name, phone, email, status, balance
-         FROM customers
-         WHERE name ILIKE $1 OR phone ILIKE $2
-         ORDER BY name ASC`,
-         [`%${q}%`, `%${q}%`]
-    );
-    res.json(rows);
+    try {
+        const [ rows ] = await db.query(
+            `SELECT id, name, phone, email, status, balance
+             FROM customers
+             WHERE name ILIKE ? OR phone ILIKE ?
+             ORDER BY name ASC`,
+             [`%${q}%`, `%${q}%`]
+        );
+        res.json(rows);
+    } catch (err) {
+        res.status(500).json({ error: 'Erro ao buscar clientes', detalhes: err.message });
+    }
 }
 
 module.exports = { create, getAll, getSummary, getDefaulters, getActiveOrders, search};
