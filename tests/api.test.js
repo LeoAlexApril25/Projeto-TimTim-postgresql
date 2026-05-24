@@ -23,7 +23,7 @@ describe('🔐 Auth', () => {
   it('POST /api/auth/login → 200 + token', async () => {
     const res = await request(BASE).post('/api/auth/login').send({
       email: 'teste@timtim.com',
-      password: '123456',
+      password: 'senha_segura_123',
     });
     expect(res.status).toBe(200);
     expect(res.body.token).toBeDefined();
