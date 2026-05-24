@@ -1,5 +1,5 @@
 const request = require('supertest');
-
+const path = require('path');
 const BASE = 'http://localhost:3000';
 
 // Token JWT gerado no login (preenchido automaticamente)
@@ -14,8 +14,8 @@ describe('🔐 Auth', () => {
   it('POST /api/auth/register → 201 ou 409 (usuário já existe)', async () => {
     const res = await request(BASE).post('/api/auth/register').send({
       name: 'Teste TimTim',
-      email: 'teste@timtim.com',
-      password: '123456',
+      email: 'email: `teste${Date.now()}@timtim.com`',
+      password: 'senha_segura_123', // 8 caracteres,
     });
     expect([201, 409]).toContain(res.status);
   });
