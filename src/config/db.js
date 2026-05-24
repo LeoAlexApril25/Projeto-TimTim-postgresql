@@ -2,13 +2,13 @@ const { Pool } = require('pg');
 require('dotenv').config();
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false // Obrigatório para o Render
-    },
-    max: 10,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000,
+    host:     process.env.DB_HOST,
+    user:     process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port:     process.env.DB_PORT || 5432,
+    // ⚠️ Remover o SSL pois é banco local — SSL é só para Render/produção
+    ssl: false
 });
 
 // Helper para converter sintaxe de placeholder de ? para $1, $2, etc.
