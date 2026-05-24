@@ -8,7 +8,7 @@ const pool = new Pool({
     database: process.env.DB_NAME,
     port:     process.env.DB_PORT || 5432,
     // ⚠️ Remover o SSL pois é banco local — SSL é só para Render/produção
-    ssl: false
+    ssl: { rejectUnauthorized: false } //ssl: false
 });
 
 // Helper para converter sintaxe de placeholder de ? para $1, $2, etc.
