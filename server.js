@@ -17,6 +17,7 @@ const customerRoutes = require('./src/routes/customerRoutes');
 const dashboardRoutes = require('./src/routes/dashboardRoutes');
 const deliveryRoutes = require('./src/routes/deliveryRoutes');
 const financeRoutes = require('./src/routes/financeRoutes');
+const PORT = process.env.PORT || 3000;
 
 
 
@@ -72,4 +73,5 @@ app.get('/verificar-tabelas', async (req, res) => {
 });
 
 
-app.listen(3000, ()=> console.log('Servidor rodando na porta 3000'));
+app.listen(PORT, () => console.log(`Rodando na porta ${PORT}`));
+

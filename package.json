@@ -1,9 +1,10 @@
 {
   "name": "projeto-timtim",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Backend do Projeto TimTim",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "jest --testPathPatterns=tests --forceExit"
   },
   "jest": {
