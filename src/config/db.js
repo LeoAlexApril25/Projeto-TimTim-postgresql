@@ -9,6 +9,7 @@ const pool = new Pool({
     port:     process.env.DB_PORT || 5432,
     // ⚠️ Remover o SSL pois é banco local — SSL é só para Render/produção
     ssl: { rejectUnauthorized: false } //ssl: false
+    // ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 });
 
 // Helper para converter sintaxe de placeholder de ? para $1, $2, etc.
