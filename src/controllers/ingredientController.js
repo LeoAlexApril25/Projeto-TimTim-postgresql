@@ -3,12 +3,13 @@ const db = require('../config/db');
 // Função para criar um novo ingrediente
 const create = async (req, res) => {
     try{
-        const{ name, unit, cost_per_unit} = req.body;
+        const{ name, unit, cost_per_unit, stock_quantity } = req.body;
 
         // Comando SQL para inserir no banco
         const [result] = await db.query(
-            'INSERT INTO ingredients (name, unit, cost_per_unit) VALUES (?, ?, ?)', [name,unit, cost_per_unit]
-        );
+            'INSERT INTO ingredients (name, unit, cost_per_unit, stock_quantity) VALUES (?, ?, ?.?)',[name, unit, cost_per_unit, stock_quantity || 0]
+        ); // tire o || 0 se quiser permitir estoque nulo
+        // tire stock_quantity do comando SQL se não quiser permitir estoque nulo
 
         res.status(201).json({
             success: true,

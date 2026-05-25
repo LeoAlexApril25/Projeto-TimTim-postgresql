@@ -101,4 +101,18 @@ const search = async (req, res) => {
     }
 }
 
-module.exports = { create, getAll, getSummary, getDefaulters, getActiveOrders, search};
+const update = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, phone, email, address, status } = req.body;
+        await db.query(
+            'UPDATE customers SET name=?, phone=?, email=?, address=?, status=? WHERE id=?',
+            [name, phone, email, address, status, id]
+        );
+        res.json({ success: true, message: 'Cliente atualizado com sucesso' });
+    } catch (err) {
+        res.status(500).json({ error: 'Erro ao atualizar cliente', detalhes: err.message });
+    }
+};
+
+module.exports = { create, getAll, getSummary, getDefaulters, getActiveOrders, search, update };

@@ -9,5 +9,6 @@ router.get('/summary', customerController.getSummary);
 router.get('/defaulters',  customerController.getDefaulters);
 router.get('/active-orders', customerController.getActiveOrders);
 router.get('/search', customerController.search);
+router.put('/:id', customerController.update);
 
 module.exports = router;
