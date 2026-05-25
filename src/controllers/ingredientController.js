@@ -7,7 +7,7 @@ const create = async (req, res) => {
 
         // Comando SQL para inserir no banco
         const [result] = await db.query(
-            'INSERT INTO ingredients (name, unit, cost_per_unit, stock_quantity) VALUES (?, ?, ?.?)',[name, unit, cost_per_unit, stock_quantity || 0]
+            'INSERT INTO ingredients (name, unit, cost_per_unit, stock_quantity) VALUES (?, ?, ?,?)',[name, unit, cost_per_unit, stock_quantity || 0]
         ); // tire o || 0 se quiser permitir estoque nulo
         // tire stock_quantity do comando SQL se não quiser permitir estoque nulo
 
